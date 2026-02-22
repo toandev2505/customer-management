@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
-
+<c:url var="customerAPI" value="/api/customer" />
+<c:url var="customerURL" value="/customer-management"/>
 <head>
 
     <meta charset="utf-8">
@@ -24,6 +25,9 @@
 
     <!-- Custom styles for this page -->
     <link href="<c:url value='/template/admin/vendor/datatables/dataTables.bootstrap4.min.css' />" rel="stylesheet">
+
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
 
 </head>
 
@@ -49,6 +53,12 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <c:if test="${not empty message}">
+                    	<div class="alert alert-${alert}" role="alert">
+                    		${message}
+                    	</div>
+                    </c:if>
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
                     <p class="mb-4">Customer Management Page is a basic CRM system that helps businesses manage customer information efficiently.
@@ -56,8 +66,19 @@
 
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
+                        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Customers List</h6>
+                            <div>
+                                <a href='<c:url value="/admin-customer-edit"/>'
+                                   class="btn btn-sm btn-success shadow-sm" title="Insert customer">
+                                    <i class="fas fa-plus fa-sm text-white-50"></i> Insert
+                                </a>
+
+                                <button type="button" id="btnDelete" onclick="warningBeforeDelete()"
+                                        class="btn btn-sm btn-danger shadow-sm" title="Delete customers list">
+                                    <i class="fas fa-trash-alt fa-sm text-white-50"></i> Delete
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -161,7 +182,66 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value='/template/admin/js/demo/datatables-demo.js' />"></script>
+    <script src="/template/admin/sweetalert/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#checkAll').change(function () {
+                var status = $(this).prop('checked');
+                $('tbody input[type="checkbox"], tfoot #checkAll').prop('checked', status);
+            });
 
+            $('tfoot #checkAll').change(function () {
+                var status = $(this).prop('checked');
+                $('tbody input[type="checkbox"], thead #checkAll').prop('checked', status);
+            });
+
+            $('#dataTable tbody').on('change', 'input[type="checkbox"]', function () {
+                var allChecked = true;
+                $('#dataTable tbody input[type="checkbox"]').each(function () {
+                    if (!$(this).prop('checked')) {
+                        allChecked = false;
+                        return false; // Thoát vòng lặp sớm
+                    }
+                });
+
+                $('#checkAll, tfoot #checkAll').prop('checked', allChecked);
+            });
+        });
+        function warningBeforeDelete(){
+    			swal({
+    				  title: "Xác nhận xóa",
+    				  text: "Bạn có chắc muốn xóa hay không?",
+    				  type: "warning",
+    				  showCancelButton: true,
+    				  confirmButtonClass: "btn-success",
+    				  confirmButtonText: "Xác nhận",
+    				  cancelButtonClass: "btn-danger",
+    				  cancelButtonText: "Hủy bỏ"
+    			 }).then(
+    					function(isConfirm) {
+    						if (isConfirm) {
+    							var ids = $('tbody input[type=checkbox]:checked')
+    									.map(function() {
+    										return $(this).val();
+    									}).get();
+    							deleteNew(ids);
+    						}
+    					});
+    		}
+    		function deleteNew(data) {
+    	        $.ajax({
+    	            url: '${customerAPI}',
+    	            type: 'DELETE',
+    	            contentType: 'application/json',
+    	            data: JSON.stringify(data),
+    	            success: function (result) {
+    	            	window.location.href = "${customerURL}?message=delete_success";
+    	            },
+    	            error: function (error) {
+    	            	window.location.href = "${customerURL}?message=error_system";
+    	            }
+    	        });
+    	    }
+    </script>
 </body>
-
 </html>

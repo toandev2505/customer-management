@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +19,17 @@ public class CustomerService implements ICustomerService {
 
     @Autowired
     private CustomerConverter customerConverter;
+
+    @Override
+    public List<CustomerDTO> findAll() {
+        List<CustomerDTO> list = new ArrayList<>();
+        List<CustomerEntity> entities = customerRepository.findAll();
+        for (CustomerEntity item : entities) {
+            CustomerDTO customerDTO = customerConverter.toDTO(item);
+            list.add(customerDTO);
+        }
+        return list;
+    }
 
     @Override
     @Transactional

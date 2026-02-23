@@ -5,7 +5,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Admin Controller</div>
             </a>
 
             <!-- Divider -->
@@ -99,7 +99,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="<c:url value="/customer-management" />">
+                <a class="nav-link" href="<c:url value='/admin/customer-management' />">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Customer Management</span></a>
             </li>

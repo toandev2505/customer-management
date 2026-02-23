@@ -61,15 +61,15 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Customer Management</h1>
-                    <p class="mb-4">Customer Management Page is a basic CRM system that helps businesses manage customer information efficiently.
-</p>
+                    <p class="mb-4">Customer Management Page is a basic CRM system that helps businesses
+                        manage customer information efficiently.</p>
 
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Customers List</h6>
                             <div>
-                                <a href='<c:url value="/admin-customer-edit"/>'
+                                <a href='<c:url value="/admin/customer-management/edit"/>'
                                    class="btn btn-sm btn-success shadow-sm" title="Insert customer">
                                     <i class="fas fa-plus fa-sm text-white-50"></i> Insert
                                 </a>
@@ -115,8 +115,14 @@
                                                 <td>${item.name}</td>
                                                 <td>${item.phone}</td>
                                                 <td>${item.status}</td>
-                                                <td><a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-                                                    title="Edit" href='#'><i class="fas fa-edit"></i></a></td>
+                                                <td>
+                                                    <c:url var="updateCustomerURL" value="/admin/customer-management/edit">
+                                                	    <c:param name="id" value="${item.id}"></c:param>
+                                                	</c:url>
+                                                    <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
+                                                    title="Edit" href="${updateCustomerURL}">
+                                                    <i class="fas fa-edit"></i></a>
+                                                </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

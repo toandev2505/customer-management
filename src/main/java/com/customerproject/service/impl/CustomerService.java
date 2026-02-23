@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -32,6 +33,14 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public CustomerDTO findById(Long id){
+        Optional<CustomerEntity> optionalCustomerEntity = Optional.of(customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found")));
+        CustomerEntity customerEntity = optionalCustomerEntity.get();
+        return customerConverter.toDTO(customerEntity);
+    }
+
+    @Override
     @Transactional
     public CustomerDTO save(CustomerDTO customerDTO){
         CustomerEntity customerEntity;
@@ -43,6 +52,7 @@ public class CustomerService implements ICustomerService {
             customerEntity = customerConverter.toEntity(customerDTO, oldCustomerEntity);
         } else{
             customerEntity = customerConverter.toEntity(customerDTO);
+            customerEntity.setStatus(1);
         }
         customerEntity = customerRepository.save(customerEntity);
         return customerConverter.toDTO(customerEntity);

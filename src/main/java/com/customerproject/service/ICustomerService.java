@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface ICustomerService {
     List<CustomerDTO> findAll();
+
+    CustomerDTO findById(Long id);
+
     CustomerDTO save(CustomerDTO customerDTO);
     void delete(List<Long> ids);
 }

@@ -16,5 +16,4 @@ public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> 
     @Transactional
     @Query("UPDATE CustomerEntity c SET c.status = 0 WHERE c.id IN :ids")
     void softDeleteByIds(@Param("ids") List<Long> ids);
-
 }

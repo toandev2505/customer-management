@@ -1,8 +1,7 @@
-package com.customerproject.api.customer;
+package com.customerproject.api.admin;
 
 import com.customerproject.dto.CustomerDTO;
 import com.customerproject.service.impl.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

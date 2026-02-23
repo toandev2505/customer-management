@@ -1,7 +1,6 @@
 package com.customerproject.dto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 //model
@@ -11,8 +10,7 @@ public abstract class BaseDTO<T> {
 //	private Date modifiedDate;
 //	private String createdBy;
 //	private String modifiedBy;
-	private long[] ids;
-	private List<T> listResult = new ArrayList<T>();
+	private List<T> listResult = new ArrayList<>();
 //	private Integer page;
 //	private Integer limit;
 //	private Integer totalPage;
@@ -81,12 +79,6 @@ public abstract class BaseDTO<T> {
 //	public void setModifiedBy(String modifiedBy) {
 //		this.modifiedBy = modifiedBy;
 //	}
-	public long[] getIds() {
-		return ids;
-	}
-	public void setIds(long[] ids) {
-		this.ids = ids;
-	}
 	public List<T> getListResult() {
 		return listResult;
 	}

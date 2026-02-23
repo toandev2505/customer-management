@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <c:url var="customerAPI" value="/api/customer" />
 <c:url var="customerURL" value="/customer-management"/>

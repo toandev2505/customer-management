@@ -61,3 +61,29 @@ Dựa trên cấu trúc hệ thống, dự án được xây dựng với:
 1. **Clone dự án:**
    ```bash
    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+Gemini đã nói
+Đây là đoạn mã Markdown tiếp nối từ phần Hướng dẫn cài đặt cho đến hết file, giúp hoàn thiện trang GitHub của bạn:
+
+Markdown
+---
+
+## 🚀 Hướng dẫn cài đặt và sử dụng
+
+### 1. Yêu cầu hệ thống
+* **Java:** Phiên bản 11 hoặc cao hơn.
+* **Build Tool:** Maven hoặc Gradle.
+* **Database:** MySQL hoặc PostgreSQL (tùy cấu hình).
+
+### 2. Các bước khởi chạy
+1. **Clone dự án:**
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+Cấu hình Database:
+Chỉnh sửa thông tin kết nối trong file src/main/resources/application.yaml.
+
+Build & Run:
+
+Bash
+./mvnw spring-boot:run
+Truy cập:
+Mở trình duyệt tại địa chỉ: http://localhost:8081/admin/customer-management

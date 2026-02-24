@@ -17,12 +17,14 @@ Hệ thống quản lý khách hàng (Customer Management Page) là một giải
 
 ### 1. Danh sách khách hàng
 Trang quản trị chính cho phép theo dõi toàn bộ database khách hàng.
-![Customer List Management](image_42b018.png)
+![Customer List Management](<img width="1918" height="969" alt="Screenshot 2026-02-24 124939" src="https://github.com/user-attachments/assets/aa3c53e2-7193-4f22-a325-0485983269c8" />)
+
 *(Hình ảnh minh họa giao diện danh sách khách hàng)*
 
 ### 2. Thêm mới khách hàng
 Giao diện "New Customer Insertion" giúp tối ưu hóa việc nhập liệu.
-![Insert Customer Form](Screenshot%202026-02-24%20124005.png)
+![Insert Customer Form](<img width="1917" height="965" alt="Screenshot 2026-02-24 124005" src="https://github.com/user-attachments/assets/5f145497-853c-45cb-8f9c-53db1e2d373c" />)
+
 *(Hình ảnh minh họa form thêm mới khách hàng)*
 
 ---
@@ -46,3 +48,16 @@ Dựa trên cấu trúc hệ thống, dự án được xây dựng với:
     "phone": "0123456789",
     "status": "1"
 }
+---
+
+## 🚀 Hướng dẫn cài đặt và sử dụng
+
+### 1. Yêu cầu hệ thống
+* **Java:** Phiên bản 11 hoặc cao hơn.
+* **Build Tool:** Maven hoặc Gradle.
+* **Database:** MySQL hoặc PostgreSQL (tùy cấu hình).
+
+### 2. Các bước khởi chạy
+1. **Clone dự án:**
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)

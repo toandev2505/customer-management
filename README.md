@@ -17,13 +17,13 @@ Hệ thống quản lý khách hàng (Customer Management Page) là một giải
 
 ### 1. Danh sách khách hàng
 Trang quản trị chính cho phép theo dõi toàn bộ database khách hàng.
-![Customer List Management](<img width="1918" height="969" alt="Screenshot 2026-02-24 124939" src="https://github.com/user-attachments/assets/aa3c53e2-7193-4f22-a325-0485983269c8" />)
+![Customer List Management](https://github.com/user-attachments/assets/aa3c53e2-7193-4f22-a325-0485983269c8)
 
 *(Hình ảnh minh họa giao diện danh sách khách hàng)*
 
 ### 2. Thêm mới khách hàng
 Giao diện "New Customer Insertion" giúp tối ưu hóa việc nhập liệu.
-![Insert Customer Form](<img width="1917" height="965" alt="Screenshot 2026-02-24 124005" src="https://github.com/user-attachments/assets/5f145497-853c-45cb-8f9c-53db1e2d373c" />)
+![Insert Customer Form](https://github.com/user-attachments/assets/5f145497-853c-45cb-8f9c-53db1e2d373c)
 
 *(Hình ảnh minh họa form thêm mới khách hàng)*
 

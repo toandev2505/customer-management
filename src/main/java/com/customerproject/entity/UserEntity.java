@@ -65,4 +65,15 @@ public class UserEntity extends BaseEntity {
 	public void setRoles(List<RoleEntity> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity{" +
+				"userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", fullName='" + fullName + '\'' +
+				", status=" + status +
+				", roles=" + roles +
+				'}';
+	}
 }

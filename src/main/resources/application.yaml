@@ -8,6 +8,10 @@ spring:
     url: jdbc:mysql://localhost:3306/customer_management
     username: root
     password:
+  security:
+    user:
+      name: admin
+      password: 123456
 
   jpa:
     hibernate:

@@ -205,7 +205,7 @@
                 $('#dataTable tbody input[type="checkbox"]').each(function () {
                     if (!$(this).prop('checked')) {
                         allChecked = false;
-                        return false; // Thoát vòng lặp sớm
+                        return false;
                     }
                 });
 

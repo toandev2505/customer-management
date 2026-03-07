@@ -1,17 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
-<c:url var="customerAPI" value="/api/admin/customer" />
-<c:url var="customerURL" value="/admin/customer-management"/>
+<html lang="en">
+<c:url var="customerAPI" value="/api/admin/history-customer" />
+<c:url var="customerURL" value="/admin/history-customer-management"/>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Customer Management</title>
+    <meta charset="UTF-8">
+    <title>Inactive Customer</title>
 
     <!-- Custom fonts for this template -->
     <link href="<c:url value='/template/admin/vendor/fontawesome-free/css/all.min.css' />" rel="stylesheet" type="text/css">
@@ -27,11 +22,8 @@
 
     <!-- sweet alert -->
     <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
-
 </head>
-
 <body id="page-top">
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -68,11 +60,10 @@
                         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Customers List</h6>
                             <div>
-                                <a href='<c:url value="/admin/customer-management/edit"/>'
-                                   class="btn btn-sm btn-success shadow-sm" title="Insert customer">
-                                    <i class="fas fa-plus fa-sm text-white-50"></i> Insert
-                                </a>
-
+                                <button type="button" id="btnRecover" onclick="warningBeforeRecover()"
+                                        class="btn btn-sm btn-success shadow-sm" title="Recover customers list">
+                                    <i class="fas fa-undo fa-sm text-white-50"></i> Recover
+                                </button>
                                 <button type="button" id="btnDelete" onclick="warningBeforeDelete()"
                                         class="btn btn-sm btn-danger shadow-sm" title="Delete customers list">
                                     <i class="fas fa-trash-alt fa-sm text-white-50"></i> Delete
@@ -90,7 +81,6 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -101,7 +91,6 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -119,14 +108,6 @@
                                                 <c:if test="${item.status == 1}">
                                                     <td>Active</td>
                                                 </c:if>
-                                                <td>
-                                                    <c:url var="updateCustomerURL" value="/admin/customer-management/edit">
-                                                	    <c:param name="id" value="${item.id}"></c:param>
-                                                	</c:url>
-                                                    <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-                                                    title="Edit" href="${updateCustomerURL}">
-                                                    <i class="fas fa-edit"></i></a>
-                                                </td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
@@ -217,10 +198,47 @@
                 $('#checkAll, tfoot #checkAll').prop('checked', allChecked);
             });
         });
+
+function warningBeforeRecover(){
+    			swal({
+    				  title: "Xác nhận phục hồi",
+    				  text: "Bạn có chắc muốn khôi phục hay không?",
+    				  type: "warning",
+    				  showCancelButton: true,
+    				  confirmButtonClass: "btn-success",
+    				  confirmButtonText: "Xác nhận",
+    				  cancelButtonClass: "btn-danger",
+    				  cancelButtonText: "Hủy bỏ"
+    			 }).then(
+    					function(isConfirm) {
+    						if (isConfirm) {
+    							var ids = $('tbody input[type=checkbox]:checked')
+    									.map(function() {
+    										return $(this).val();
+    									}).get();
+    							recoverCustomer(ids);
+    						}
+    					});
+    		}
+    		function recoverCustomer(data) {
+    	        $.ajax({
+    	            url: '${customerAPI}',
+    	            type: 'POST',
+    	            contentType: 'application/json',
+    	            data: JSON.stringify(data),
+    	            success: function (result) {
+    	            	window.location.href = "${customerURL}?message=recover_success";
+    	            },
+    	            error: function (error) {
+    	            	window.location.href = "${customerURL}?message=error_system";
+    	            }
+    	        });
+    	}
+
         function warningBeforeDelete(){
     			swal({
     				  title: "Xác nhận xóa",
-    				  text: "Bạn có chắc muốn xóa hay không?",
+    				  text: "Sau khi xóa sẽ không thể khôi phục .Bạn có chắc muốn xóa hay không?",
     				  type: "warning",
     				  showCancelButton: true,
     				  confirmButtonClass: "btn-success",
@@ -251,7 +269,7 @@
     	            	window.location.href = "${customerURL}?message=error_system";
     	            }
     	        });
-    	    }
+    	}
     </script>
 </body>
 </html>

@@ -25,7 +25,7 @@ public class CustomerController {
     public ModelAndView showList(HttpServletRequest req){
         ModelAndView mav = new ModelAndView("admin/customer-list");
         CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setListResult(customerService.findAll());
+        customerDTO.setListResult(customerService.findAllWithActive());
         if (req.getParameter("message") != null) {
             Map<String, String> message = messageUtil.getMessage(req.getParameter("message"));
             mav.addObject("message", message.get("message"));
@@ -42,6 +42,20 @@ public class CustomerController {
         if (id != null){
             customerDTO = customerService.findById(id);
         }
+        if (req.getParameter("message") != null) {
+            Map<String, String> message = messageUtil.getMessage(req.getParameter("message"));
+            mav.addObject("message", message.get("message"));
+            mav.addObject("alert", message.get("alert"));
+        }
+        mav.addObject("model", customerDTO);
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/history-customer-management", method = RequestMethod.GET)
+    public ModelAndView showUnactiveList(HttpServletRequest req){
+        ModelAndView mav = new ModelAndView("admin/history-customer-list");
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setListResult(customerService.findAllWithUnactive());
         if (req.getParameter("message") != null) {
             Map<String, String> message = messageUtil.getMessage(req.getParameter("message"));
             mav.addObject("message", message.get("message"));

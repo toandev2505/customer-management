@@ -15,12 +15,21 @@ public class MessageUtil {
         } else if (message.equals("insert_success")) {
             result.put("message", "Insert Success!");
             result.put("alert", "success");
-        } else if (message.equals("error_system")) {
-            result.put("message", "Error System!");
-            result.put("alert", "danger");
         } else if (message.equals("delete_success")) {
             result.put("message", "Delete Success!");
             result.put("alert", "success");
+        } else if (message.equals("recover_success")) {
+            result.put("message", "Recover Success!");
+            result.put("alert", "success");
+        } else if (message.equals("error_system")) {
+            result.put("message", "Error System!");
+            result.put("alert", "danger");
+        } else if (message.equals("error")) {
+            result.put("message", "Username or Password incorrect!");
+            result.put("alert", "danger");
+        } else if (message.equals("accessDenied")) {
+            result.put("message", "Not Authorize! You cannot access this page.");
+            result.put("alert", "danger");
         }
         return result;
     }

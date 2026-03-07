@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
-<c:url var="customerAPI" value="/api/customer" />
+<c:url var="customerAPI" value="/api/admin/customer" />
 <c:url var="customerURL" value="/admin/customer-management"/>
 <c:url var="editCustomerURL" value="/admin/customer-management/edit"/>
 <head>

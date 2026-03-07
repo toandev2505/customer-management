@@ -6,29 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "customer")
-public class CustomerEntity extends BaseEntity {
+@Table(name = "ward")
+public class WardEntity extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
-    private String phone;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_id")
+    private ProvinceEntity province;
 
-    @Column(name = "status")
-    private Integer status;
+    @OneToMany(mappedBy = "ward")
+    private List<ProductEntity> products;
 
-    @OneToMany(mappedBy = "customer")
+    @ManyToMany(mappedBy = "preferredWards")
     private List<CustomerRequirementEntity> customerRequirements = new ArrayList<>();
-
-//    private User assigned_to;
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getName() {
         return name;
@@ -38,12 +29,20 @@ public class CustomerEntity extends BaseEntity {
         this.name = name;
     }
 
-    public Integer getStatus() {
-        return status;
+    public ProvinceEntity getProvince() {
+        return province;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setProvince(ProvinceEntity province) {
+        this.province = province;
+    }
+
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductEntity> products) {
+        this.products = products;
     }
 
     public List<CustomerRequirementEntity> getCustomerRequirements() {

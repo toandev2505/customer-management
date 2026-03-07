@@ -61,7 +61,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 //.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(ex -> ex
-                        .accessDeniedPage("/access-denied")
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.sendRedirect(request.getContextPath() + "/access-denied");
+                        })
                 )
                 .build();
     }

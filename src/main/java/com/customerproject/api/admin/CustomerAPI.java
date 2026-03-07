@@ -1,8 +1,9 @@
 package com.customerproject.api.admin;
 
 import com.customerproject.dto.CustomerDTO;
-import com.customerproject.service.impl.CustomerService;
+import com.customerproject.service.ICustomerService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,8 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class CustomerAPI {
-    private final CustomerService customerService;
-    public CustomerAPI(CustomerService customerService){
-        this.customerService = customerService;
-    }
+    @Autowired
+    private ICustomerService customerService;
 
     //<--start test
     @GetMapping(value = "/csrf-token")
@@ -23,9 +22,10 @@ public class CustomerAPI {
     }
 
     @GetMapping(value = "/api/admin/customer")
-    public List<CustomerDTO> getCustomer(){ return customerService.findAll(); }
+    public List<CustomerDTO> getCustomer(){ return customerService.findAllWithActive(); }
     //end test-->
 
+    //api customer
     @PostMapping(value = "/api/admin/customer")
     public CustomerDTO createCustomer(@RequestBody CustomerDTO dto){
         return customerService.save(dto);
@@ -40,5 +40,16 @@ public class CustomerAPI {
     @DeleteMapping(value = "/api/admin/customer")
     public void deleteCustomers(@RequestBody List<Long> ids){
         customerService.delete(ids);
+    }
+
+    //api history customer
+    @DeleteMapping(value = "/api/admin/history-customer")
+    public void deleteUnactiveCustomers(@RequestBody List<Long> ids){
+        customerService.deleteInactiveObject(ids);
+    }
+
+    @PostMapping(value = "/api/admin/history-customer")
+    public void recoverCustomers(@RequestBody List<Long> ids){
+        customerService.recover(ids);
     }
 }

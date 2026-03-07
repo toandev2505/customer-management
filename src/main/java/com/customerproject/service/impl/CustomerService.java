@@ -22,9 +22,20 @@ public class CustomerService implements ICustomerService {
     private CustomerConverter customerConverter;
 
     @Override
-    public List<CustomerDTO> findAll() {
+    public List<CustomerDTO> findAllWithActive() {
         List<CustomerDTO> list = new ArrayList<>();
-        List<CustomerEntity> entities = customerRepository.findAll();
+        List<CustomerEntity> entities = customerRepository.findAllByStatus(1);
+        for (CustomerEntity item : entities) {
+            CustomerDTO customerDTO = customerConverter.toDTO(item);
+            list.add(customerDTO);
+        }
+        return list;
+    }
+
+    @Override
+    public List<CustomerDTO> findAllWithUnactive() {
+        List<CustomerDTO> list = new ArrayList<>();
+        List<CustomerEntity> entities = customerRepository.findAllByStatus(0);
         for (CustomerEntity item : entities) {
             CustomerDTO customerDTO = customerConverter.toDTO(item);
             list.add(customerDTO);
@@ -62,5 +73,17 @@ public class CustomerService implements ICustomerService {
     @Transactional
     public void delete(List<Long> ids) {
         customerRepository.softDeleteByIds(ids);
+    }
+
+    @Override
+    @Transactional
+    public void recover(List<Long> ids) {
+        customerRepository.recoverByIds(ids);
+    }
+
+    @Transactional
+    @Override
+    public void deleteInactiveObject(List<Long> ids) {
+        customerRepository.deleteAllById(ids);
     }
 }

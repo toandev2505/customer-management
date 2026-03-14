@@ -38,6 +38,16 @@ public class ProductEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private StatusOfProduct status;
 
+    @Column(name = "image_name")
+    private String imageName;
+
+    @Column(name = "image_type")
+    private String imageType;
+
+    @Lob
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
+    private byte[] imageData;
+
     public String getTitle() {
         return title;
     }
@@ -108,5 +118,29 @@ public class ProductEntity extends BaseEntity {
 
     public void setStatus(StatusOfProduct status) {
         this.status = status;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }

@@ -3,19 +3,24 @@ package com.customerproject.dto;
 import com.customerproject.entity.Direction;
 import com.customerproject.entity.StatusOfProduct;
 import com.customerproject.entity.TypeOfProduct;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
-public class ProductDTO {
+public class ProductDTO extends BaseDTO<ProductDTO> {
     private String title;
     private TypeOfProduct type;
     private String address;
-    private String district_id;
+    private Long wardId;
     private BigDecimal price;
     private Double area;
     private Integer bedrooms;
     private Direction direction;
     private StatusOfProduct status;
+    private String imageName;
+    private String imageType;
+    private String base64Image;
+    private MultipartFile imageFile;
 
     public String getTitle() {
         return title;
@@ -41,12 +46,12 @@ public class ProductDTO {
         this.address = address;
     }
 
-    public String getDistrict_id() {
-        return district_id;
+    public Long getWardId() {
+        return wardId;
     }
 
-    public void setDistrict_id(String district_id) {
-        this.district_id = district_id;
+    public void setWardId(Long wardId) {
+        this.wardId = wardId;
     }
 
     public BigDecimal getPrice() {
@@ -87,5 +92,37 @@ public class ProductDTO {
 
     public void setStatus(StatusOfProduct status) {
         this.status = status;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }

@@ -48,14 +48,20 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value='/admin/product' />">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Product Management</span></a>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/customer-management' />">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Customer Management</span></a>
             </li>
-
-            <hr class="sidebar-divider d-none d-md-block">
 
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value='/admin/history-customer-management' />">

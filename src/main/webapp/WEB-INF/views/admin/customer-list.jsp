@@ -126,6 +126,14 @@
                                                     <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
                                                     title="Edit" href="${updateCustomerURL}">
                                                     <i class="fas fa-edit"></i></a>
+
+                                                	<c:url var="detailCustomerURL" value="/admin/customer-management/detail">
+                                                        <c:param name="id" value="${item.id}"></c:param>
+                                                    </c:url>
+                                                    <a class="btn btn-sm btn-info" data-toggle="tooltip"
+                                                    title="Xem chi tiết" href="${detailCustomerURL}">
+                                                         <i class="fas fa-eye"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

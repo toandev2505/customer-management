@@ -88,7 +88,7 @@
         <input type="hidden" name="id" id="productId" value="${model.id}">
 
         <button type="button" class="btn btn-success" id="btnAddOrUpdateProduct">Lưu sản phẩm</button>
-        <a href="<c:url value='/admin/product-management/list'/>" class="btn btn-secondary">Hủy</a>
+        <a href="<c:url value='/admin/product'/>" class="btn btn-secondary">Hủy</a>
     </form>
 </div>
 

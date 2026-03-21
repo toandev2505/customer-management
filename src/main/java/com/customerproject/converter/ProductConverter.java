@@ -36,6 +36,13 @@ public class ProductConverter {
             String fullBase64 = "data:" + entity.getImageType() + ";base64," + base64;
             dto.setBase64Image(fullBase64);
         }
+        if (entity.getWard() != null) {
+            dto.setWardName(entity.getWard().getName());
+
+            if (entity.getWard().getProvince() != null) {
+                dto.setProvinceName(entity.getWard().getProvince().getName());
+            }
+        }
         return dto;
     }
 

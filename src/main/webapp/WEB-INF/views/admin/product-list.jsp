@@ -84,13 +84,13 @@
                         <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Products List</h6>
                             <div>
-                                <a href='<c:url value="/admin/customer-management/edit"/>'
-                                   class="btn btn-sm btn-success shadow-sm" title="Insert customer">
+                                <a href='<c:url value="/admin/product/edit"/>'
+                                   class="btn btn-sm btn-success shadow-sm" title="Insert product">
                                     <i class="fas fa-plus fa-sm text-white-50"></i> Insert
                                 </a>
 
                                 <button type="button" id="btnDelete" onclick="warningBeforeDelete()"
-                                        class="btn btn-sm btn-danger shadow-sm" title="Delete customers list">
+                                        class="btn btn-sm btn-danger shadow-sm" title="Delete products list">
                                     <i class="fas fa-trash-alt fa-sm text-white-50"></i> Delete
                                 </button>
                             </div>
@@ -142,7 +142,10 @@
                                                 <td>${item.title}</td>
                                                 <td>${item.type}</td>
                                                 <td>${item.address}</td>
-                                                <td>location</td>
+                                                <td>
+                                                    <i class="fas fa-map-marker-alt text-danger"></i>
+                                                    ${item.wardName}, ${item.provinceName}
+                                                </td>
                                                 <td>${item.price}</td>
                                                 <td>${item.area}</td>
                                                 <td>${item.bedrooms}</td>

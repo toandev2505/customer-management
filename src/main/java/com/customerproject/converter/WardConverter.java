@@ -13,7 +13,7 @@ public class WardConverter {
         return dto;
     }
 
-    public WardEntity toEntity(WardEntity dto){
+    public WardEntity toEntity(WardDTO dto){
         WardEntity entity = new WardEntity();
         entity.setName(dto.getName());
         return entity;

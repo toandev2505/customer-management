@@ -29,4 +29,15 @@ public class WardService implements IWardService {
         }
         return list;
     }
+
+    @Override
+    public List<WardDTO> findByProvinceId(Long provinceId) {
+        List<WardDTO> list = new ArrayList<>();
+        List<WardEntity> entities = wardRepository.findAllByProvinceId(provinceId);
+        for (WardEntity item : entities){
+            WardDTO dto = wardConverter.toDTO(item);
+            list.add(dto);
+        }
+        return list;
+    }
 }

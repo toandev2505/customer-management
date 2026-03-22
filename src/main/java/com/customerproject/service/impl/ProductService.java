@@ -5,10 +5,10 @@ import com.customerproject.dto.ProductDTO;
 import com.customerproject.entity.ProductEntity;
 import com.customerproject.entity.StatusOfProduct;
 import com.customerproject.repository.ProductRepository;
-import com.customerproject.repository.WardRepository;
 import com.customerproject.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ public class ProductService implements IProductService {
     @Autowired
     private ProductConverter productConverter;
 
-
     @Override
     public List<ProductDTO> findAll() {
         List<ProductDTO> list = new ArrayList<>();
@@ -34,6 +33,7 @@ public class ProductService implements IProductService {
         return list;
     }
 
+    @Transactional
     @Override
     public ProductDTO addImage(ProductDTO productDTO) {
         ProductEntity productEntity = productConverter.toEntity(productDTO);

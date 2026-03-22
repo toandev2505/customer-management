@@ -4,7 +4,8 @@ import com.customerproject.dto.ProductDTO;
 import com.customerproject.entity.Direction;
 import com.customerproject.entity.TypeOfProduct;
 import com.customerproject.service.IProductService;
-import com.customerproject.service.impl.WardService;
+import com.customerproject.service.IProvinceService;
+import com.customerproject.service.IWardService;
 import com.customerproject.util.MessageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,10 @@ public class ProductController {
     private MessageUtil messageUtil;
 
     @Autowired
-    private WardService wardService;
+    private IWardService wardService;
+
+    @Autowired
+    private IProvinceService provinceService;
 
     @GetMapping(value = "/admin/product")
     public ModelAndView showList(HttpServletRequest req){
@@ -49,6 +53,7 @@ public class ProductController {
             mav.addObject("message", message.get("message"));
             mav.addObject("alert", message.get("alert"));
         }
+        mav.addObject("provinces", provinceService.findAll());
         mav.addObject("wards", wardService.findAll());
         mav.addObject("directions", Direction.values());
         mav.addObject("types", TypeOfProduct.values());

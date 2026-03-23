@@ -40,6 +40,7 @@ public class ProductConverter {
             dto.setWardName(entity.getWard().getName());
 
             if (entity.getWard().getProvince() != null) {
+                dto.setProvinceId(entity.getWard().getProvince().getId());
                 dto.setProvinceName(entity.getWard().getProvince().getName());
             }
         }
@@ -48,6 +49,37 @@ public class ProductConverter {
 
     public ProductEntity toEntity(ProductDTO dto){
         ProductEntity entity = new ProductEntity();
+        entity.setTitle(dto.getTitle());
+        entity.setType(dto.getType());
+        entity.setAddress(dto.getAddress());
+        if (dto.getWardId() != null) {
+            WardEntity ward = wardRepository.findById(dto.getWardId())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy Quận với ID: " + dto.getWardId()));
+            entity.setWard(ward);
+        }
+        entity.setPrice(dto.getPrice());
+        entity.setArea(dto.getArea());
+        entity.setBedrooms(dto.getBedrooms());
+        entity.setDirection(dto.getDirection());
+        entity.setStatus(dto.getStatus());
+
+        MultipartFile file = dto.getImageFile();
+        if (file != null && !file.isEmpty()) {
+            try {
+                entity.setImageData(file.getBytes());
+
+                entity.setImageName(file.getOriginalFilename());
+
+                entity.setImageType(file.getContentType());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return entity;
+    }
+
+    public ProductEntity toEntity(ProductDTO dto, ProductEntity entity){
         entity.setTitle(dto.getTitle());
         entity.setType(dto.getType());
         entity.setAddress(dto.getAddress());

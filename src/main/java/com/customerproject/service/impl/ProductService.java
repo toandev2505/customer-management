@@ -3,7 +3,6 @@ package com.customerproject.service.impl;
 import com.customerproject.converter.ProductConverter;
 import com.customerproject.dto.ProductDTO;
 import com.customerproject.entity.ProductEntity;
-import com.customerproject.entity.StatusOfProduct;
 import com.customerproject.repository.ProductRepository;
 import com.customerproject.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,16 @@ public class ProductService implements IProductService {
 
     @Transactional
     @Override
-    public ProductDTO addImage(ProductDTO productDTO) {
-        ProductEntity productEntity = productConverter.toEntity(productDTO);
-        productEntity.setStatus(StatusOfProduct.AVAILABLE);
+    public ProductDTO save(ProductDTO productDTO) {
+        ProductEntity productEntity;
+        if (productDTO.getId() != null){
+            ProductEntity oldProductEntity = productRepository
+                    .findById(productDTO.getId())
+                    .orElseThrow(() -> new RuntimeException("Product not found"));
+            productEntity = productConverter.toEntity(productDTO, oldProductEntity);
+        } else {
+            productEntity = productConverter.toEntity(productDTO);
+        }
         productEntity = productRepository.save(productEntity);
         return productConverter.toDTO(productEntity);
     }

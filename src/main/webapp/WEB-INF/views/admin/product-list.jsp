@@ -152,7 +152,7 @@
                                                 <td>${item.direction}</td>
                                                 <td>${item.status}</td>
                                                 <td>
-                                                    <c:url var="updateCustomerURL" value="/admin/customer-management/edit">
+                                                    <c:url var="updateProductURL" value="/admin/product/edit">
                                                 	    <c:param name="id" value="${item.id}"></c:param>
                                                 	</c:url>
                                                 	<c:url var="detailProductURL" value="/admin/product/detail">
@@ -160,7 +160,7 @@
                                                     </c:url>
 
                                                     <a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-                                                    title="Edit" href="${updateCustomerURL}">
+                                                    title="Edit" href="${updateProductURL}">
                                                     <i class="fas fa-edit"></i></a>
                                                     <a class="btn btn-sm btn-info" data-toggle="tooltip"
                                                     title="Xem chi tiết" href="${detailProductURL}">

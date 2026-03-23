@@ -22,6 +22,7 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
     private String base64Image;
     private MultipartFile imageFile;
 
+    private Long provinceId;
     private String wardName;
     private String provinceName;
 
@@ -143,5 +144,13 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
 
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
+    }
+
+    public Long getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Long provinceId) {
+        this.provinceId = provinceId;
     }
 }

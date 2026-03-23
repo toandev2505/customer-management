@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/common/taglib.jsp"%>
+<c:url var="editProductURL" value="/admin/product/edit" />
+<c:url var="editProductURL" value="/admin/product/edit">
+    <c:param name="id" value="${model.id}"></c:param>
+</c:url>
 
 <html>
 <head>
@@ -64,8 +68,8 @@
                                         </tr>
                                     </table>
                                     <div class="mt-4">
-                                        <a href="<c:url value='/admin/product/list'/>" class="btn btn-secondary"> Quay lại danh sách</a>
-                                        <a href="${updateProductURL}" class="btn btn-primary">Chỉnh sửa</a>
+                                        <a href="<c:url value='/admin/product'/>" class="btn btn-secondary"> Quay lại danh sách</a>
+                                        <a href="${editProductURL}" class="btn btn-primary">Chỉnh sửa</a>
                                     </div>
                                 </div>
                             </div>

@@ -45,9 +45,12 @@ public class ProductController {
     }
 
     @GetMapping(value = "/admin/product/edit")
-    public ModelAndView editList(HttpServletRequest req){
+    public ModelAndView editList(@RequestParam(value = "id", required = false) Long id, HttpServletRequest req){
         ModelAndView mav = new ModelAndView("admin/product-edit");
         ProductDTO productDTO = new ProductDTO();
+        if (id != null){
+            productDTO = productService.findById(id);
+        }
         if (req.getParameter("message") != null) {
             Map<String, String> message = messageUtil.getMessage(req.getParameter("message"));
             mav.addObject("message", message.get("message"));

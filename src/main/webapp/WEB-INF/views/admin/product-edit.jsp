@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
 <c:url var="productAPI" value="/api/admin/product" />
-<c:url var="editProductURL" value="/admin/product/edit" />
 
 <!DOCTYPE html>
 <head>
@@ -30,62 +29,56 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <form id="formSubmit">
+                            <form:form class="form-horizontal" id="formSubmit" modelAttribute="model">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="font-weight-bold">Tiêu đề <span class="text-danger">*</span>:</label>
-                                            <input type="text" name="title" id="title" class="form-control" value="${model.title}" required>
+                                            <form:input type="text" id="title" class="form-control" path="title" required="required" />
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Tỉnh/Thành phố:</label>
-                                                    <select id="provinceSelect" class="form-control">
-                                                        <option value="">-- Chọn tỉnh --</option>
-                                                        <c:forEach var="item" items="${provinces}">
-                                                            <option value="${item.id}" ${item.name == model.provinceName ? 'selected' : ''}>
-                                                                ${item.name}
-                                                            </option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <form:select id="provinceSelect" path="provinceId" class="form-control">
+                                                        <form:option value="">-- Chọn tỉnh --</form:option>
+                                                        <form:options items="${provinces}" itemValue="id" itemLabel="name" />
+                                                    </form:select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Quận/Huyện:</label>
-                                                    <select name="wardId" id="wardSelect" class="form-control">
-                                                        <option value="">-- Chọn quận --</option>
-                                                    </select>
+                                                    <form:select path="wardId" id="wardSelect" class="form-control">
+                                                        <form:option value="">-- Chọn quận --</form:option>
+                                                    </form:select>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="font-weight-bold">Địa chỉ chi tiết:</label>
-                                            <input type="text" name="address" class="form-control" value="${model.address}">
+                                            <form:input type="text" class="form-control" path="address" />
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Loại sản phẩm:</label>
-                                                    <select name="type" class="form-control">
-                                                        <c:forEach var="item" items="${types}">
-                                                            <option value="${item}" ${item == model.type ? 'selected' : ''}>${item}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <form:select path="type" class="form-control">
+                                                        <form:option value="" label="-- Chọn loại --"/>
+                                                        <form:options items="${types}" />
+                                                    </form:select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Hướng:</label>
-                                                    <select name="direction" class="form-control">
-                                                        <c:forEach var="item" items="${directions}">
-                                                            <option value="${item}" ${item == model.direction ? 'selected' : ''}>${item}</option>
-                                                        </c:forEach>
-                                                    </select>
+                                                    <form:select path="direction" class="form-control">
+                                                        <form:option value="" label="-- Chọn hướng --"/>
+                                                        <form:options items="${directions}" />
+                                                    </form:select>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,24 +89,24 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Giá (VNĐ):</label>
-                                                    <input type="number" name="price" class="form-control" value="${model.price}">
+                                                    <form:input type="number" path="price" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="font-weight-bold">Diện tích (m²):</label>
-                                                    <input type="number" name="area" class="form-control" step="0.1" value="${model.area}">
+                                                    <form:input type="number" path="area" class="form-control" step="0.1" value="${model.area}" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="font-weight-bold">Số phòng ngủ:</label>
-                                            <input type="number" name="bedrooms" class="form-control" value="${model.bedrooms}">
+                                            <form:input type="number" path="bedrooms" class="form-control" value="${model.bedrooms}" />
                                         </div>
                                         <div class="form-group">
                                             <label class="font-weight-bold">Hình ảnh đại diện:</label>
                                             <div class="custom-file">
-                                                <input type="file" name="imageFile" class="custom-file-input" id="imageInput">
+                                                <form:input type="file" path="imageFile" class="custom-file-input" id="imageInput" />
                                                 <label class="custom-file-label">Chọn ảnh...</label>
                                             </div>
                                             <div class="mt-3 text-center border p-2">
@@ -124,15 +117,22 @@
                                     </div>
                                 </div>
 
-                                <input type="hidden" name="id" id="productId" value="${model.id}">
+                                <form:input type="hidden" path="id" id="productId" />
 
                                 <div class="mt-4 border-top pt-3 text-right">
-                                    <button type="button" class="btn btn-primary" id="btnAddOrUpdateProduct">
-                                        <i class="fas fa-save"></i> Lưu dữ liệu
-                                    </button>
+                                    <c:if test="${not empty model.id}">
+                                        <button type="button" class="btn btn-primary" id="btnAddOrUpdateProduct">
+                                            <i class="fas fa-save"></i> Update Product
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${empty model.id}">
+                                        <button type="button" class="btn btn-primary" id="btnAddOrUpdateProduct">
+                                            <i class="fas fa-save"></i> Insert Product
+                                        </button>
+                                    </c:if>
                                     <a href="<c:url value='/admin/product'/>" class="btn btn-secondary">Quay lại</a>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                     </div>
                 </div>
@@ -203,11 +203,10 @@
             var title = (id === "") ? "Xác nhận thêm mới" : "Xác nhận cập nhật";
             var text = (id === "") ? "Bạn có muốn thêm sản phẩm này không?" : "Bạn có muốn lưu các thay đổi không?";
 
-            // Dùng swal giống hệt hàm xóa của bạn
             swal({
                 title: title,
                 text: text,
-                type: "info", // Hiện icon dấu chấm hỏi/thông tin
+                type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-success",
                 confirmButtonText: "Xác nhận",
@@ -216,7 +215,6 @@
                 closeOnConfirm: false // Giữ lứa chọn để hiện loading nếu muốn
             }).then(function(isConfirm) {
                 if (isConfirm) {
-                    // Nếu người dùng nhấn Xác nhận, gọi hàm Ajax
                     if (id === "") {
                         addProduct(formData);
                     } else {
@@ -246,7 +244,24 @@
             });
         }
 
-        // Hàm updateProduct tương tự như addProduct nhưng dùng type: 'PUT'
+        function updateProduct(data) {
+                    $.ajax({
+                        url: '${productAPI}',
+                        type: 'PUT',
+                        enctype: 'multipart/form-data',
+                        processData: false,
+                        contentType: false,
+                        data: data,
+                        success: function(result) {
+                            swal("Thành công", "Dữ liệu đã được lưu!", "success").then(function() {
+                                window.location.href = "${editProductURL}?id=" + result.id + "&message=update_success";
+                            });
+                        },
+                        error: function(error) {
+                            swal("Lỗi", "Không thể lưu sản phẩm, vui lòng thử lại", "error");
+                        }
+                    });
+                }
     </script>
 </body>
 </html>

@@ -17,6 +17,10 @@ spring:
     suffix: .html
     cache: false
     view-names: login, register
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
   jpa:
     hibernate:

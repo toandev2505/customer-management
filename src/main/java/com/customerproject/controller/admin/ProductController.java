@@ -2,10 +2,10 @@ package com.customerproject.controller.admin;
 
 import com.customerproject.dto.ProductDTO;
 import com.customerproject.entity.Direction;
+import com.customerproject.entity.StatusOfProduct;
 import com.customerproject.entity.TypeOfProduct;
 import com.customerproject.service.IProductService;
 import com.customerproject.service.IProvinceService;
-import com.customerproject.service.IWardService;
 import com.customerproject.util.MessageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,6 @@ public class ProductController {
 
     @Autowired
     private MessageUtil messageUtil;
-
-    @Autowired
-    private IWardService wardService;
 
     @Autowired
     private IProvinceService provinceService;
@@ -57,9 +54,9 @@ public class ProductController {
             mav.addObject("alert", message.get("alert"));
         }
         mav.addObject("provinces", provinceService.findAll());
-        mav.addObject("wards", wardService.findAll());
         mav.addObject("directions", Direction.values());
         mav.addObject("types", TypeOfProduct.values());
+        mav.addObject("states", StatusOfProduct.values());
         mav.addObject("model", productDTO);
         return mav;
     }

@@ -64,7 +64,22 @@
                                         </tr>
                                         <tr>
                                             <th>Trạng thái:</th>
-                                            <td><span class="badge badge-success">${model.status}</span></td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${model.status == 'AVAILABLE'}">
+                                                        <span class="badge badge-success text-uppercase">Trống</span>
+                                                    </c:when>
+                                                    <c:when test="${model.status == 'DEPOSITED'}">
+                                                        <span class="badge badge-warning text-uppercase">Đã đặt cọc</span>
+                                                    </c:when>
+                                                    <c:when test="${model.status == 'SOLD'}">
+                                                        <span class="badge badge-danger text-uppercase">Đã bán</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="badge badge-secondary">${model.status}</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                         </tr>
                                     </table>
                                     <div class="mt-4">

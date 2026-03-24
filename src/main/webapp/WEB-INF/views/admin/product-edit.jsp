@@ -82,6 +82,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="font-weight-bold">Trạng thái:</label>
+                                                    <form:select path="status" class="form-control">
+                                                        <form:option value="" label="-- Chọn trạng thái --"/>
+                                                        <form:options items="${states}" />
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
@@ -110,8 +121,9 @@
                                                 <label class="custom-file-label">Chọn ảnh...</label>
                                             </div>
                                             <div class="mt-3 text-center border p-2">
-                                                <c:set var="imageSrc" value="${not empty model.base64Image ? model.base64Image : 'https://via.placeholder.com/250x150'}" />
-                                                <img id="preview" src="${imageSrc}" style="max-height: 180px; max-width: 100%;">
+                                                <c:set var="defaultImage" value="${pageContext.request.contextPath}/template/admin/img/default-image.jpg" />
+                                                <c:set var="imageSrc" value="${not empty model.base64Image ? model.base64Image : defaultImage}" />
+                                                <img id="preview" src="${imageSrc}" style="max-height: 180px; max-width: 100%;" onerror="this.src='${defaultImage}'">
                                             </div>
                                         </div>
                                     </div>

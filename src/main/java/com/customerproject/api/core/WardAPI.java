@@ -1,4 +1,4 @@
-package com.customerproject.api.admin;
+package com.customerproject.api.core;
 
 import com.customerproject.dto.WardDTO;
 import com.customerproject.service.IWardService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController(value = "apiOfCore")
 @RequestMapping("/api/ward")
 public class WardAPI {
     @Autowired

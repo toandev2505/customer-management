@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-@Controller(value = "controllerOfProduct")
+@Controller(value = "controllerOfProductAdmin")
 public class ProductController {
     @Autowired
     private IProductService productService;

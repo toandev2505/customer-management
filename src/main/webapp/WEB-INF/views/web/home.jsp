@@ -31,6 +31,8 @@
         </div>
     </c:if>
     <h1>Oops! We&apos;re still working on this page. Feel free to check out our other links instead.</h1>
+    <h1>Vui lòng truy cập đường link sau:</h1>
+    <a href="<c:url value = '/product' />">Click ở đây</a>
 
     <script src="<c:url value='/template/admin/vendor/jquery/jquery.min.js' />"></script>
     <script src="<c:url value='/template/admin/vendor/bootstrap/js/bootstrap.bundle.min.js' />"></script>

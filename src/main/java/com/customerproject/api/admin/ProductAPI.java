@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "apiOfProduct")
+@RestController(value = "apiOfProductAdmin")
 public class ProductAPI {
     @Autowired
     private IProductService productService;

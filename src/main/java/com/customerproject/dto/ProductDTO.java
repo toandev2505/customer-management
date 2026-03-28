@@ -6,12 +6,13 @@ import com.customerproject.entity.TypeOfProduct;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class ProductDTO extends BaseDTO<ProductDTO> {
     private String title;
     private TypeOfProduct type;
     private String address;
-    private Long wardId;
+    private List<Long> wardId;
     private BigDecimal price;
     private Double area;
     private Integer bedrooms;
@@ -50,11 +51,11 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
         this.address = address;
     }
 
-    public Long getWardId() {
+    public List<Long> getWardId() {
         return wardId;
     }
 
-    public void setWardId(Long wardId) {
+    public void setWardId(List<Long> wardId) {
         this.wardId = wardId;
     }
 

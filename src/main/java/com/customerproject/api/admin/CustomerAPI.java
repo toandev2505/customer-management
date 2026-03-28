@@ -52,4 +52,6 @@ public class CustomerAPI {
     public void recoverCustomers(@RequestBody List<Long> ids){
         customerService.recover(ids);
     }
+
+    //api customer requirement
 }

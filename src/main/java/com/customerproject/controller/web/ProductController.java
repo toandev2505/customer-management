@@ -7,7 +7,10 @@ import com.customerproject.service.IProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller(value = "controllerOfProductWeb")
 public class ProductController {
@@ -18,11 +21,12 @@ public class ProductController {
     private IProvinceService provinceService;
 
     @GetMapping(value = "/product")
-    public ModelAndView showList(){
+    public ModelAndView showList(@ModelAttribute("model") ProductDTO modelSearch){
         ModelAndView mav = new ModelAndView("web/product-list");
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setListResult(productService.findAll());
-        mav.addObject("model", productDTO);
+        List<ProductDTO> products = productService.search(modelSearch);
+        modelSearch.setListResult(products);
+
+        mav.addObject("model", modelSearch);
         mav.addObject("provinces", provinceService.findAll());
         mav.addObject("directions", Direction.values());
         return mav;

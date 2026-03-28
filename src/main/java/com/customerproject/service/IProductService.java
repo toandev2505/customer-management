@@ -10,4 +10,6 @@ public interface IProductService {
     ProductDTO save(ProductDTO productDTO);
 
     ProductDTO findById(Long id);
+
+    List<ProductDTO> search(ProductDTO modelSearch);
 }

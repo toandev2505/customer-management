@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @Component
 public class ProductConverter {
@@ -22,7 +24,18 @@ public class ProductConverter {
         dto.setTitle(entity.getTitle());
         dto.setType(entity.getType());
         dto.setAddress(entity.getAddress());
-        dto.setWardId(entity.getWard().getId());
+        if (entity.getWard() != null) {
+            List<Long> wardIds = new ArrayList<>();
+            wardIds.add(entity.getWard().getId());
+            dto.setWardId(wardIds);
+
+            dto.setWardName(entity.getWard().getName());
+
+            if (entity.getWard().getProvince() != null) {
+                dto.setProvinceId(entity.getWard().getProvince().getId());
+                dto.setProvinceName(entity.getWard().getProvince().getName());
+            }
+        }
         dto.setPrice(entity.getPrice());
         dto.setArea(entity.getArea());
         dto.setBedrooms(entity.getBedrooms());
@@ -48,44 +61,17 @@ public class ProductConverter {
     }
 
     public ProductEntity toEntity(ProductDTO dto){
-        ProductEntity entity = new ProductEntity();
-        entity.setTitle(dto.getTitle());
-        entity.setType(dto.getType());
-        entity.setAddress(dto.getAddress());
-        if (dto.getWardId() != null) {
-            WardEntity ward = wardRepository.findById(dto.getWardId())
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy Quận với ID: " + dto.getWardId()));
-            entity.setWard(ward);
-        }
-        entity.setPrice(dto.getPrice());
-        entity.setArea(dto.getArea());
-        entity.setBedrooms(dto.getBedrooms());
-        entity.setDirection(dto.getDirection());
-        entity.setStatus(dto.getStatus());
-
-        MultipartFile file = dto.getImageFile();
-        if (file != null && !file.isEmpty()) {
-            try {
-                entity.setImageData(file.getBytes());
-
-                entity.setImageName(file.getOriginalFilename());
-
-                entity.setImageType(file.getContentType());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return entity;
+        return toEntity(dto, new ProductEntity());
     }
 
     public ProductEntity toEntity(ProductDTO dto, ProductEntity entity){
         entity.setTitle(dto.getTitle());
         entity.setType(dto.getType());
         entity.setAddress(dto.getAddress());
-        if (dto.getWardId() != null) {
-            WardEntity ward = wardRepository.findById(dto.getWardId())
-                    .orElseThrow(() -> new RuntimeException("Không tìm thấy Quận với ID: " + dto.getWardId()));
+        if (dto.getWardId() != null && !dto.getWardId().isEmpty()) {
+            Long idToSave = dto.getWardId().get(0);
+            WardEntity ward = wardRepository.findById(idToSave)
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy Quận"));
             entity.setWard(ward);
         }
         entity.setPrice(dto.getPrice());

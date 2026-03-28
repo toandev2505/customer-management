@@ -23,7 +23,7 @@
     </div>
 
     <div class="filter-section shadow-sm">
-        <form:form action="search-products" method="GET" modelAttribute="model" id="formSubmit">
+        <form:form action="${pageContext.request.contextPath}/product" method="GET" modelAttribute="model" id="formSubmit">
             <input type="hidden" name="customerId" value="${param.customerId}">
 
             <div class="row g-3">
@@ -68,7 +68,13 @@
     </div>
 
     <div class="row">
-        <c:forEach var="product" items="${products}">
+        <c:if test="${empty model.listResult}">
+           <div class="col-12 text-center">
+               <p class="alert alert-warning">Không tìm thấy bất động sản nào phù hợp.</p>
+           </div>
+        </c:if>
+
+        <c:forEach var="product" items="${model.listResult}">
             <div class="col-md-4 mb-4">
                 <div class="card property-card h-100">
                     <div class="position-relative">
@@ -99,7 +105,7 @@
                                 <i class="fas fa-map-marker-alt text-danger mr-2"></i>${product.address}
                             </p>
                             <p class="mb-1 text-truncate">
-                                <i class="fas fa-map-marker-alt text-danger mr-2"></i>${product.wardName}, ${product.districtName}
+                                <i class="fas fa-map-marker-alt text-danger mr-2"></i>${product.wardName}, ${product.provinceName}
                             </p>
 
                             <div class="row no-gutters mt-2">

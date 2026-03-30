@@ -38,7 +38,7 @@ Hệ thống ghi nhận hành vi tìm kiếm của người dùng để cập nh
 Quản lý tập trung thông tin khách hàng và các phân khúc họ đang quan tâm.
 ![Customer Profile](https://github.com/user-attachments/assets/90590b54-f33a-43e3-9da7-be07b41fda52)
 
-### 3. Quản lý thông tin khách hàng
+### 4. Quản lý thông tin khách hàng
 Hệ thống vẫn lưu lại thông tin khách hàng đã xóa để phục vụ cho mục tiêu kinh doanh.
 ![History Customer Profile](https://github.com/user-attachments/assets/4974410c-82d5-441c-8f6a-32aa159ce885)
 

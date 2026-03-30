@@ -1,4 +1,4 @@
-<img width="1903" height="866" alt="Screenshot 2026-03-30 152541" src="https://github.com/user-attachments/assets/5a0381ae-6848-46af-8f95-d0c775113b3d" /><img width="1913" height="866" alt="Screenshot 2026-03-30 153500" src="https://github.com/user-attachments/assets/fbb8a9f2-eae6-4d79-8c36-501ca74fea23" /># 🚀 Real Estate CRM - Customer & Product Management System
+# 🚀 Real Estate CRM - Customer & Product Management System
 
 Hệ thống quản lý khách hàng và kho hàng bất động sản toàn diện, giúp tối ưu hóa quy trình từ tìm kiếm, khớp nhu cầu (Matching) đến quản lý dữ liệu lịch sử.
 

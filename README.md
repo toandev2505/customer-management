@@ -1,4 +1,4 @@
-# 🚀 Real Estate CRM - Customer & Product Management System
+<img width="1903" height="866" alt="Screenshot 2026-03-30 152541" src="https://github.com/user-attachments/assets/5a0381ae-6848-46af-8f95-d0c775113b3d" /><img width="1913" height="866" alt="Screenshot 2026-03-30 153500" src="https://github.com/user-attachments/assets/fbb8a9f2-eae6-4d79-8c36-501ca74fea23" /># 🚀 Real Estate CRM - Customer & Product Management System
 
 Hệ thống quản lý khách hàng và kho hàng bất động sản toàn diện, giúp tối ưu hóa quy trình từ tìm kiếm, khớp nhu cầu (Matching) đến quản lý dữ liệu lịch sử.
 
@@ -26,15 +26,20 @@ Hệ thống quản lý khách hàng và kho hàng bất động sản toàn di�
 
 ### 1. Quản lý kho hàng & Chi tiết sản phẩm
 Giao diện hiển thị chi tiết thông số kỹ thuật và hình ảnh thực tế của bất động sản.
-![Product Detail](https://github.com/user-attachments/assets/65e8964e-375a-4b95-8854-e9f0237e8c3b)
+![Product List])(https://github.com/user-attachments/assets/8631edf9-a8e9-4c1b-9d1c-0a95712dd704)
+![Product Detail](https://github.com/user-attachments/assets/d3014dce-2b14-444f-a314-cf93fccb27d5)
 
 ### 2. Bộ lọc sản phẩm & Tự động lưu nhu cầu
 Hệ thống ghi nhận hành vi tìm kiếm của người dùng để cập nhật nhu cầu khách hàng.
-![Search & Filter](https://github.com/user-attachments/assets/f290823c-8367-4a70-87a7-543e5c94e803)
+![Search & Filter](https://github.com/user-attachments/assets/a81a3310-f05f-4fbc-b74b-82d18109adf1)
 
 ### 3. Hồ sơ khách hàng & Lịch sử nhu cầu
 Quản lý tập trung thông tin khách hàng và các phân khúc họ đang quan tâm.
-![Customer Profile](https://github.com/user-attachments/assets/518e16d4-d54e-4f7f-856c-0e263725b821)
+![Customer Profile](https://github.com/user-attachments/assets/90590b54-f33a-43e3-9da7-be07b41fda52)
+
+### 3. Quản lý thông tin khách hàng
+Hệ thống vẫn lưu lại thông tin khách hàng đã xóa để phục vụ cho mục tiêu kinh doanh.
+![History Customer Profile](https://github.com/user-attachments/assets/4974410c-82d5-441c-8f6a-32aa159ce885)
 
 ---
 
@@ -61,6 +66,7 @@ Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm ki�
     "note": "Hệ thống tự động lưu từ bộ lọc tìm kiếm"
 }
 ---
+```
 
 ## 🚀 Hướng dẫn cài đặt và khởi chạy
 

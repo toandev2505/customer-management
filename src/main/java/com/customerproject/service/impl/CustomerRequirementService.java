@@ -7,6 +7,7 @@ import com.customerproject.repository.CustomerRequirementRepository;
 import com.customerproject.service.ICustomerRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,5 +27,13 @@ public class CustomerRequirementService implements ICustomerRequirementService {
         return entities.stream()
                 .map(customerRequirementConverter::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public CustomerRequirementDTO save(CustomerRequirementDTO dto) {
+        CustomerRequirementEntity entity = customerRequirementConverter.toEntity(dto);
+        entity = customerRequirementRepository.save(entity);
+        return customerRequirementConverter.toDTO(entity);
     }
 }

@@ -14,6 +14,7 @@ public class CustomUser extends User {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 
+    private Long id;
     private int status;
     private String fullName;
 
@@ -31,5 +32,13 @@ public class CustomUser extends User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

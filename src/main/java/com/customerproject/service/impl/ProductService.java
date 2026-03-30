@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,25 +75,29 @@ public class ProductService implements IProductService {
             predicates.add(cb.equal(root.get("type"), modelSearch.getType()));
         }
 
+        Join<ProductEntity, WardEntity> wardJoin = null;
         if (modelSearch.getWardId() != null && !modelSearch.getWardId().isEmpty()) {
-            Join<ProductEntity, WardEntity> wardJoin = root.join("ward");
+            wardJoin = root.join("ward");
             predicates.add(wardJoin.get("id").in(modelSearch.getWardId()));
         }
 
-//        if (modelSearch.getMinPrice() != null) {
-//            predicates.add(cb.ge(root.get("price"), modelSearch.getMinPrice()));
-//        }
-//        if (modelSearch.getMaxPrice() != null) {
-//            predicates.add(cb.le(root.get("price"), modelSearch.getMaxPrice()));
-//        }
+        if (modelSearch.getProvinceId() != null) {
+            wardJoin = root.join("ward");
+            predicates.add(cb.equal(wardJoin.get("province").get("id"), modelSearch.getProvinceId()));
+        }
+
+        BigDecimal billion = new BigDecimal("1000000000");
+        if (modelSearch.getMinPrice() != null) {
+            BigDecimal minSearch = modelSearch.getMinPrice().multiply(billion);
+            predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minSearch));
+        }
+        if (modelSearch.getMaxPrice() != null) {
+            BigDecimal maxSearch = modelSearch.getMaxPrice().multiply(billion);
+            predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxSearch));
+        }
 
         if (StringUtils.isNotBlank(modelSearch.getTitle())) {
             predicates.add(cb.like(root.get("title"), "%" + modelSearch.getTitle() + "%"));
-        }
-
-        if (modelSearch.getProvinceId() != null) {
-            Join<ProductEntity, WardEntity> wardJoin = root.join("ward");
-            predicates.add(cb.equal(wardJoin.get("province").get("id"), modelSearch.getProvinceId()));
         }
 
         cq.where(predicates.toArray(new Predicate[0]));

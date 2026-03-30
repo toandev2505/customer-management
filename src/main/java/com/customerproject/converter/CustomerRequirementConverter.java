@@ -25,7 +25,7 @@ public class CustomerRequirementConverter {
         dto.setId(entity.getId());
 
         if (entity.getCustomer() != null) {
-            dto.setId(entity.getCustomer().getId());
+            dto.setCustomerId(entity.getCustomer().getId());
         }
 
         dto.setMinPrice(entity.getMinPrice());

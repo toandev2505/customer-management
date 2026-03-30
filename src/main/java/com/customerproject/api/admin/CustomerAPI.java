@@ -1,9 +1,12 @@
 package com.customerproject.api.admin;
 
 import com.customerproject.dto.CustomerDTO;
+import com.customerproject.dto.CustomerRequirementDTO;
+import com.customerproject.service.ICustomerRequirementService;
 import com.customerproject.service.ICustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,9 @@ import java.util.List;
 public class CustomerAPI {
     @Autowired
     private ICustomerService customerService;
+
+    @Autowired
+    private ICustomerRequirementService customerRequirementService;
 
     //<--start test
     @GetMapping(value = "/csrf-token")
@@ -54,4 +60,9 @@ public class CustomerAPI {
     }
 
     //api customer requirement
+    @PostMapping("/api/customer/requirement")
+    public ResponseEntity<CustomerRequirementDTO> saveRequirement(@RequestBody CustomerRequirementDTO dto) {
+        CustomerRequirementDTO result = customerRequirementService.save(dto);
+        return ResponseEntity.ok(result);
+    }
 }

@@ -24,12 +24,12 @@
 
     <div class="filter-section shadow-sm">
         <form:form action="${pageContext.request.contextPath}/product" method="GET" modelAttribute="model" id="formSubmit">
-            <input type="hidden" name="customerId" value="${param.customerId}">
+            <input type="hidden" name="customerId" id="customerId" value="${loggedInCustomerId}">
 
             <div class="row g-3">
                 <div class="col-md-3">
                     <label class="font-weight-bold text-dark">Loại hình</label>
-                    <form:select path="type" class="form-control">
+                    <form:select path="type" id="type" class="form-control">
                         <form:option value="">Tất cả loại hình</form:option>
                         <form:options items="${types}" />
                     </form:select>
@@ -53,8 +53,8 @@
                 <div class="col-md-3">
                     <label class="font-weight-bold text-dark">Giá từ - đến (Tỷ)</label>
                     <div class="input-group">
-                        <form:input path="" type="number" class="form-control" placeholder="Từ" />
-                        <form:input path="" type="number" class="form-control" placeholder="Đến" />
+                        <form:input path="minPrice" type="number" class="form-control" placeholder="Từ" />
+                        <form:input path="maxPrice" type="number" class="form-control" placeholder="Đến" />
                     </div>
                 </div>
             </div>
@@ -175,6 +175,47 @@
                     }
                 });
             }
+            $(document).on('submit', '#formSubmit', function(e) {
+                e.preventDefault();
+                console.log("Submit event fired!"); // Xem dòng này có hiện ở tab Console không
+
+                var form = this;
+                var customerId = $('#customerId').val();
+
+                console.log("Checking Customer ID: ", customerId);
+
+                if (!customerId || customerId === "") {
+                    console.log("No Customer ID, submitting form normally...");
+                    form.submit();
+                    return;
+                }
+
+                var data = {
+                    customerId: customerId,
+                    minPrice: $('input[name="minPrice"]').val(),
+                    maxPrice: $('input[name="maxPrice"]').val(),
+                    propertyType: $('#type').val(),
+                    preferredWardIds: $('#wardSelect').val(),
+                    note: "Khách hàng thực hiện tìm kiếm từ trang danh sách"
+                };
+
+                console.log("Data to send:", data);
+
+                $.ajax({
+                    url: '${customerRequestAPI}',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        console.log("API Success:", response);
+                        form.submit();
+                    },
+                    error: function(error) {
+                        console.error("API Error:", error);
+                        form.submit();
+                    }
+                });
+            });
         });
 
         $("#imageInput").change(function(){

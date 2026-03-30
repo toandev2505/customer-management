@@ -26,6 +26,8 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
     private Long provinceId;
     private String wardName;
     private String provinceName;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
 
     public String getTitle() {
         return title;
@@ -153,5 +155,21 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
 
     public void setProvinceId(Long provinceId) {
         this.provinceId = provinceId;
+    }
+
+    public BigDecimal getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(BigDecimal minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public BigDecimal getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(BigDecimal maxPrice) {
+        this.maxPrice = maxPrice;
     }
 }

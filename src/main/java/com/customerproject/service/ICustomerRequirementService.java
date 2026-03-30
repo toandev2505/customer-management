@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICustomerRequirementService {
     List<CustomerRequirementDTO> findAllByCustomerId(Long customerId);
+    CustomerRequirementDTO save(CustomerRequirementDTO dto);
 }

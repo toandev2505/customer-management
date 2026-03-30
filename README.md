@@ -26,7 +26,8 @@ Hệ thống quản lý khách hàng và kho hàng bất động sản toàn di�
 
 ### 1. Quản lý kho hàng & Chi tiết sản phẩm
 Giao diện hiển thị chi tiết thông số kỹ thuật và hình ảnh thực tế của bất động sản.
-![Product List])(https://github.com/user-attachments/assets/8631edf9-a8e9-4c1b-9d1c-0a95712dd704)
+![Product List](https://github.com/user-attachments/assets/d2bd27e7-ed8d-44b3-a835-066b397bb2de)
+
 ![Product Detail](https://github.com/user-attachments/assets/d3014dce-2b14-444f-a314-cf93fccb27d5)
 
 ### 2. Bộ lọc sản phẩm & Tự động lưu nhu cầu

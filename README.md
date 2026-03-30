@@ -1,89 +1,77 @@
-# 🚀 Customer Management System (CRM)
+# 🚀 Real Estate CRM - Customer & Product Management System
 
-Hệ thống quản lý khách hàng (Customer Management Page) là một giải pháp CRM cơ bản giúp doanh nghiệp quản lý thông tin khách hàng một cách hiệu quả và trực quan.
+Hệ thống quản lý khách hàng và kho hàng bất động sản toàn diện, giúp tối ưu hóa quy trình từ tìm kiếm, khớp nhu cầu (Matching) đến quản lý dữ liệu lịch sử.
 
 ---
 
-## 🌟 Tính năng chính
+## 🌟 Tính năng nổi bật
 
-* **Quản lý danh sách:** Hiển thị danh sách khách hàng với các trường dữ liệu như Tên, Số điện thoại và Trạng thái.
-* **Tìm kiếm & Phân trang:** Hỗ trợ tìm kiếm nhanh và phân chia dữ liệu theo số lượng bản ghi hiển thị (Show entries).
-* **Thêm mới (Insert):** Giao diện chuyên biệt để nhập liệu khách hàng mới vào hệ thống.
-* **Thao tác nhanh:** Hỗ trợ các nút chức năng Chỉnh sửa (Edit) và Xóa (Delete) trực tiếp trên bảng.
+### 1. Quản lý Kho hàng (Product Management)
+* **Danh sách sản phẩm:** Hiển thị trực quan các thông tin tiêu đề, loại hình (APARTMENT, LAND, VILLA), diện tích và hướng nhà.
+* **Chi tiết sản phẩm:** Xem hình ảnh thực tế, thông số kỹ thuật (số phòng ngủ), địa chỉ chính xác đến từng Phường/Xã và trạng thái thực tế (**TRỐNG**, **ĐÃ CỌC**).
+* **Bộ lọc thông minh:** Tìm kiếm nhanh theo vị trí, khoảng giá (tính theo Tỷ VNĐ) và loại hình bất động sản.
+
+### 2. Quản lý Khách hàng & Nhu cầu (Smart Matching)
+* **Hồ sơ khách hàng:** Lưu trữ thông tin liên hệ và tình trạng hoạt động của từng khách.
+* **Tự động lưu nhu cầu:** Khi môi giới hoặc khách hàng thực hiện **Tìm kiếm & Lọc** sản phẩm, hệ thống sẽ tự động trích xuất các tiêu chí lọc để lưu vào "Lịch sử nhu cầu tìm kiếm".
+* **Theo dõi nhu cầu:** Hiển thị danh sách các yêu cầu tìm kiếm cũ (Loại BĐS, Khoảng giá, Khu vực) ngay trong trang chi tiết khách hàng để dễ dàng tư vấn lại.
+
+### 3. Thùng rác & Lịch sử (History Customer - Soft Delete)
+* **Xóa an toàn:** Khi xóa khách hàng, dữ liệu không mất đi mà được chuyển vào mục **History Customer**.
+* **Khôi phục dữ liệu (Recover):** Hỗ trợ xem lại danh sách khách hàng cũ và khôi phục (Active) lại trạng thái hoạt động chỉ với một click, đảm bảo không thất thoát dữ liệu khách hàng tiềm năng.
 
 ---
 
 ## 📸 Giao diện ứng dụng
 
-### 1. Danh sách khách hàng
-Trang quản trị chính cho phép theo dõi toàn bộ database khách hàng.
-![Customer List Management](https://github.com/user-attachments/assets/aa3c53e2-7193-4f22-a325-0485983269c8)
+### 1. Quản lý kho hàng & Chi tiết sản phẩm
+Giao diện hiển thị chi tiết thông số kỹ thuật và hình ảnh thực tế của bất động sản.
+![Product Detail](https://github.com/user-attachments/assets/65e8964e-375a-4b95-8854-e9f0237e8c3b)
 
-*(Hình ảnh minh họa giao diện danh sách khách hàng)*
+### 2. Bộ lọc sản phẩm & Tự động lưu nhu cầu
+Hệ thống ghi nhận hành vi tìm kiếm của người dùng để cập nhật nhu cầu khách hàng.
+![Search & Filter](https://github.com/user-attachments/assets/f290823c-8367-4a70-87a7-543e5c94e803)
 
-### 2. Thêm mới khách hàng
-Giao diện "New Customer Insertion" giúp tối ưu hóa việc nhập liệu.
-![Insert Customer Form](https://github.com/user-attachments/assets/5f145497-853c-45cb-8f9c-53db1e2d373c)
-
-*(Hình ảnh minh họa form thêm mới khách hàng)*
+### 3. Hồ sơ khách hàng & Lịch sử nhu cầu
+Quản lý tập trung thông tin khách hàng và các phân khúc họ đang quan tâm.
+![Customer Profile](https://github.com/user-attachments/assets/518e16d4-d54e-4f7f-856c-0e263725b821)
 
 ---
 
 ## 🛠 Công nghệ sử dụng
 
-Dựa trên cấu trúc hệ thống, dự án được xây dựng với:
-* **Backend:** Java Spring Boot (chạy trên port `8081`).
-* **Frontend:** Bootstrap, FontAwesome (biểu tượng Edit/Search), và SB Admin template.
-* **Database:** Hỗ trợ lưu trữ thông tin tên và số điện thoại khách hàng.
+* **Backend:** Java Spring Boot (Port `8081`).
+* **Frontend:** JSP, JSTL, Bootstrap 5, SB Admin Template.
+* **Cấu trúc API:** Phân chia rõ ràng giữa `/api/admin` và `/api/web` để tái sử dụng logic nhưng vẫn đảm bảo bảo mật.
+* **Database:** Hỗ trợ lưu trữ đa phân cấp (Tỉnh -> Quận -> Phường) cho địa chỉ sản phẩm.
 
 ---
 
-## 💾 Dữ liệu mẫu (Postman)
+## 💾 Dữ liệu mẫu (Lưu nhu cầu tự động)
 
-Để kiểm thử API, bạn có thể sử dụng định dạng JSON sau:
+Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm kiếm của khách hàng:
 
 ```json
 {
-    "name": "Nguyễn Văn A",
-    "phone": "0123456789",
-    "status": "1"
+    "customerId": 1,
+    "minPrice": 20.0,
+    "maxPrice": 40.0,
+    "districtIds": [760, 761],
+    "propertyType": "VILLA",
+    "note": "Hệ thống tự động lưu từ bộ lọc tìm kiếm"
 }
 ---
 
-## 🚀 Hướng dẫn cài đặt và sử dụng
+## 🚀 Hướng dẫn cài đặt và khởi chạy
 
 ### 1. Yêu cầu hệ thống
-* **Java:** Phiên bản 11 hoặc cao hơn.
-* **Build Tool:** Maven hoặc Gradle.
-* **Database:** MySQL hoặc PostgreSQL (tùy cấu hình).
+* **Java:** Phiên bản 11 hoặc 17 (Khuyên dùng).
+* **Build Tool:** Maven 3.6+.
+* **Database:** MySQL 8.0 hoặc PostgreSQL.
+* **IDE:** IntelliJ IDEA, Eclipse hoặc VS Code.
 
-### 2. Các bước khởi chạy
+### 2. Các bước thiết lập
 1. **Clone dự án:**
    ```bash
    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-Gemini đã nói
-Đây là đoạn mã Markdown tiếp nối từ phần Hướng dẫn cài đặt cho đến hết file, giúp hoàn thiện trang GitHub của bạn:
-
-Markdown
----
-
-## 🚀 Hướng dẫn cài đặt và sử dụng
-
-### 1. Yêu cầu hệ thống
-* **Java:** Phiên bản 11 hoặc cao hơn.
-* **Build Tool:** Maven hoặc Gradle.
-* **Database:** MySQL hoặc PostgreSQL (tùy cấu hình).
-
-### 2. Các bước khởi chạy
-1. **Clone dự án:**
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-Cấu hình Database:
-Chỉnh sửa thông tin kết nối trong file src/main/resources/application.yaml.
-
-Build & Run:
-
-Bash
-./mvnw spring-boot:run
-Truy cập:
-Mở trình duyệt tại địa chỉ: http://localhost:8081/admin/customer-management
+   cd YOUR_REPO_NAME

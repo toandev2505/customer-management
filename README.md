@@ -53,6 +53,29 @@ Hệ thống vẫn lưu lại thông tin khách hàng đã xóa để phục v�
 
 ---
 
+## 🤖 Tích hợp Trí tuệ nhân tạo (AI Lead Scoring)
+
+Điểm nhấn công nghệ của dự án là khả năng **tự động đánh giá mức độ tiềm năng** của khách hàng đối với từng sản phẩm thông qua một dịch vụ AI độc lập (Microservice).
+
+### 1. Cơ chế hoạt động (Smart Lead Matching)
+Thay vì chỉ lọc dữ liệu thô, hệ thống sử dụng mô hình học máy để phân tích:
+* **Price Matching:** Tính toán độ lệch giữa ngân sách khách hàng và giá thực tế.
+* **Area Matching:** So sánh diện tích mong muốn với thông số sản phẩm.
+* **Location Relevance:** Kiểm tra sự trùng khớp về vị trí địa lý (Phường/Xã).
+
+### 2. Phân loại khách hàng (Classification)
+Dữ liệu từ Spring Boot được gửi sang [AI Service (FastAPI)](https://github.com/toandev2505/customer-management-ai) để xử lý và trả về các nhãn định danh:
+* 🔴 **HOT:** Khách hàng cực kỳ tiềm năng, các tiêu chí khớp gần như hoàn hảo.
+* 🟡 **WARM:** Khách hàng quan tâm, có một vài tiêu chí lệch nhẹ nhưng vẫn đáng cân nhắc.
+* 🔵 **COLD:** Tiêu chí lệch nhiều, độ ưu tiên chăm sóc thấp hơn.
+
+### 3. Công nghệ AI sử dụng
+* **Model:** Random Forest Classifier (Scikit-learn).
+* **Communication:** Sử dụng `RestTemplate` để kết nối liên dịch vụ giữa Java và Python.
+* **Sorting:** Sản phẩm được tự động sắp xếp theo **AI Score** từ cao xuống thấp.
+
+---
+
 ## 💾 Dữ liệu mẫu (Lưu nhu cầu tự động)
 
 Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm kiếm của khách hàng:
@@ -66,7 +89,6 @@ Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm ki�
     "propertyType": "VILLA",
     "note": "Hệ thống tự động lưu từ bộ lọc tìm kiếm"
 }
----
 ```
 
 ## 🚀 Hướng dẫn cài đặt và khởi chạy
@@ -80,5 +102,17 @@ Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm ki�
 ### 2. Các bước thiết lập
 1. **Clone dự án:**
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-   cd YOUR_REPO_NAME
+   # Clone AI Service
+    git clone [https://github.com/toandev2505/customer-management-ai](https://github.com/toandev2505/customer-management-ai)
+    cd customer-management-ai
+
+# Cài đặt môi trường và thư viện
+    pip install -r requirements.txt
+
+# Khởi chạy server AI (mặc định port 8000)
+    uvicorn main:app --port 8000
+
+# Clone Spring Boot Project
+    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+    cd YOUR_REPO_NAME
+```

@@ -103,16 +103,16 @@ Hệ thống sử dụng cấu trúc JSON sau để lưu lại hành vi tìm ki�
 1. **Clone dự án:**
    ```bash
    # Clone AI Service
-git clone [https://github.com/toandev2505/customer-management-ai](https://github.com/toandev2505/customer-management-ai)
-cd customer-management-ai
+    git clone [https://github.com/toandev2505/customer-management-ai](https://github.com/toandev2505/customer-management-ai)
+    cd customer-management-ai
 
 # Cài đặt môi trường và thư viện
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 # Khởi chạy server AI (mặc định port 8000)
-uvicorn main:app --port 8000
+    uvicorn main:app --port 8000
 
 # Clone Spring Boot Project
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME
+    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+    cd YOUR_REPO_NAME
 ```

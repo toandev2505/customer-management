@@ -2,8 +2,12 @@ package com.customerproject.controller.admin;
 
 import com.customerproject.dto.CustomerDTO;
 import com.customerproject.dto.CustomerRequirementDTO;
+import com.customerproject.dto.LeadAiResponseDTO;
+import com.customerproject.dto.ProductDTO;
+import com.customerproject.service.IAiService;
 import com.customerproject.service.ICustomerRequirementService;
 import com.customerproject.service.ICustomerService;
+import com.customerproject.service.IProductService;
 import com.customerproject.util.MessageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +27,13 @@ public class CustomerController {
     ICustomerService customerService;
 
     @Autowired
+    IProductService productService;
+
+    @Autowired
     ICustomerRequirementService customerRequirementService;
+
+    @Autowired
+    IAiService aiService;
 
     @Autowired
     MessageUtil messageUtil;
@@ -66,6 +76,35 @@ public class CustomerController {
         if (id != null){
             customerDTO = customerService.findById(id);
             requirementDTOList = customerRequirementService.findAllByCustomerId(id);
+
+            if (!requirementDTOList.isEmpty()) {
+                List<ProductDTO> allProducts = productService.findAll();
+
+                for (ProductDTO product : allProducts) {
+                    double bestScore = 0.0;
+                    String bestLabel = "COLD";
+
+                    // Duyệt qua TẤT CẢ yêu cầu của khách hàng này
+                    for (CustomerRequirementDTO require : requirementDTOList) {
+                        LeadAiResponseDTO aiResult = aiService.predictLeadPotential(require, product);
+
+                        // Nếu yêu cầu này khớp hơn yêu cầu trước đó, thì lấy điểm này
+                        if (aiResult.getScore() > bestScore) {
+                            bestScore = aiResult.getScore();
+                            bestLabel = aiResult.getLabel();
+                        }
+                    }
+
+                    // Gán kết quả tốt nhất tìm được cho sản phẩm
+                    product.setAiScore(bestScore);
+                    product.setAiLabel(bestLabel);
+                }
+
+                // Sắp xếp sản phẩm theo điểm số từ cao xuống thấp
+                allProducts.sort((p1, p2) -> p2.getAiScore().compareTo(p1.getAiScore()));
+                mav.addObject("recommendedProducts", allProducts);
+            }
+
         }
         if (req.getParameter("message") != null) {
             Map<String, String> message = messageUtil.getMessage(req.getParameter("message"));

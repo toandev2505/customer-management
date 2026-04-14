@@ -51,6 +51,11 @@
                 </div>
 
                 <div class="col-md-3">
+                    <label class="font-weight-bold text-dark">Diện tích</label>
+                    <form:input path="area" type="number" class="form-control" id="area" />
+                </div>
+
+                <div class="col-md-3">
                     <label class="font-weight-bold text-dark">Giá từ - đến (Tỷ)</label>
                     <div class="input-group">
                         <form:input path="minPrice" type="number" class="form-control" placeholder="Từ" />
@@ -177,7 +182,7 @@
             }
             $(document).on('submit', '#formSubmit', function(e) {
                 e.preventDefault();
-                console.log("Submit event fired!"); // Xem dòng này có hiện ở tab Console không
+                console.log("Submit event fired!");
 
                 var form = this;
                 var customerId = $('#customerId').val();
@@ -196,6 +201,7 @@
                     maxPrice: $('input[name="maxPrice"]').val(),
                     propertyType: $('#type').val(),
                     preferredWardIds: $('#wardSelect').val(),
+                    preferredArea: $('#area').val(),
                     note: "Khách hàng thực hiện tìm kiếm từ trang danh sách"
                 };
 

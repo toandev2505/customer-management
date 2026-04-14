@@ -64,6 +64,7 @@ public class ProductService implements IProductService {
         return productConverter.toDTO(productEntity);
     }
 
+    @Transactional
     @Override
     public List<ProductDTO> search(ProductDTO modelSearch) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -86,18 +87,21 @@ public class ProductService implements IProductService {
             predicates.add(cb.equal(wardJoin.get("province").get("id"), modelSearch.getProvinceId()));
         }
 
-        BigDecimal billion = new BigDecimal("1000000000");
         if (modelSearch.getMinPrice() != null) {
-            BigDecimal minSearch = modelSearch.getMinPrice().multiply(billion);
+            BigDecimal minSearch = modelSearch.getMinPrice();
             predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minSearch));
         }
         if (modelSearch.getMaxPrice() != null) {
-            BigDecimal maxSearch = modelSearch.getMaxPrice().multiply(billion);
+            BigDecimal maxSearch = modelSearch.getMaxPrice();
             predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxSearch));
         }
 
         if (StringUtils.isNotBlank(modelSearch.getTitle())) {
             predicates.add(cb.like(root.get("title"), "%" + modelSearch.getTitle() + "%"));
+        }
+
+        if (modelSearch.getArea() != null) {
+            predicates.add(cb.lessThanOrEqualTo(root.get("area"), modelSearch.getArea()));
         }
 
         cq.where(predicates.toArray(new Predicate[0]));

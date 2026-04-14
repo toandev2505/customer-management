@@ -29,6 +29,9 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
 
+    private Double aiScore;
+    private String aiLabel;
+
     public String getTitle() {
         return title;
     }
@@ -171,5 +174,21 @@ public class ProductDTO extends BaseDTO<ProductDTO> {
 
     public void setMaxPrice(BigDecimal maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public Double getAiScore() {
+        return aiScore;
+    }
+
+    public void setAiScore(Double aiScore) {
+        this.aiScore = aiScore;
+    }
+
+    public String getAiLabel() {
+        return aiLabel;
+    }
+
+    public void setAiLabel(String aiLabel) {
+        this.aiLabel = aiLabel;
     }
 }

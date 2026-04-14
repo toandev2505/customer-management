@@ -42,6 +42,10 @@ Quản lý tập trung thông tin khách hàng và các phân khúc họ đang q
 Hệ thống vẫn lưu lại thông tin khách hàng đã xóa để phục vụ cho mục tiêu kinh doanh.
 ![History Customer Profile](https://github.com/user-attachments/assets/4974410c-82d5-441c-8f6a-32aa159ce885)
 
+### 5. Mô hình AI dự đoán khả năng khách hàng chốt đơn
+Mô hình AI đánh giá các sản phẩm phù hợp với yêu cầu khách hàng.
+![AI Profile](https://github.com/user-attachments/assets/4ea1d54b-0dcd-4aea-a740-c8445f4e53ae)
+
 ---
 
 ## 🛠 Công nghệ sử dụng
